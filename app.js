@@ -1,92 +1,66 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-var app = express();
-
 var port     = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-// -----------------------------------------------------------------------
-/*
-var mongoose   = require('mongoose');
-*/
-//mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'); // connect to our database
-//mongoose.connect('mongodb://localhost/vps'); // connect to our database
-//mongoose.connect('mongodb://localhost/vps'); // connect to our database
-
+//- DB Connection ---------------------------------
 
 var configDB = require('./config/database.js');
 
-// configuration ===============================================================
-console.log(configDB.url);
 mongoose.connect(configDB.url); // connect to our database
 
-console.log(mongoose.connection.readyState);
+//console.log(mongoose.connection.readyState);
 
 mongoose.connection.on('open', function (ref) {
   console.log('Connected to mongo server.');
 });
+
 mongoose.connection.on('error', function (err) {
   console.log('Could not connect to mongo server!');
   console.log(err);
 });
 
-//-------//-----------//-------------//-------------
+//- End DB Connection -----------------------------
+
+var app = express();
 
 require('./config/passport')(passport); // pass passport for configuration
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
-
 app.use(favicon());
 app.use(logger('dev'));
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded());
-//app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
 
 // set up our express application
 //app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
-//app.set('view engine', 'ejs'); // set up ejs for templating
-app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade'); // set up jade for templating
 
 // required for passport
-app.use(session({ secret: 'VPSus2014#' })); // session secret
+app.use(session({ secret: 'PETbr2016#' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded());
-//app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-//-------//-----------//-------------//-------------
+//- Routes ----------------------------------------
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/bears', bears);
-//app.use('/executives', executives);
-//require('./routes.js')(app, passport);
 
-//app.use('/debug', debug);
-
-
-// -----------------------------------------------------------------------
+//- End Routes ------------------------------------
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -94,8 +68,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-/// error handlers
 
 // development error handler
 // will print stacktrace
@@ -119,30 +91,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
 module.exports = app;
-
-/*
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(favicon());
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-*/
