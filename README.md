@@ -1,38 +1,38 @@
 Pet Adoption
 ---
 
-##### O que é?
+##### What is it?
 ---------------------
-Software opensource para gerenciamento e divulgação de adoção de animais.
+Open source software for management and dissemination of pet adoption.
 
-##### Módulos Atuais
+##### Current modules
 ---------------------
 
-##### Módulos Planejados
+##### Planned modules
 ---------------------
-* Gerenciamento de animais 
-    * Lar temporário (v0.1)
-    * Abrigos (v0.1)
- * Gerenciamento de doações
-    * Apadrinhamento  (v0.1)
-    * Doações em dinheiro (v0.1)
-    * Doações de produtos
-    * Rifas
- * Captação
-    * voluntário/lar temporário (v0.1)
-    * email marketing
- * Controle contábil
-    * Entrada e saída (v0.1)
-    * Prestação de contas (v0.1)
- * Controle de estoque
-    * Produtos
- * Loja
-    * Estoque/Sem estoque
-    * Acompanhamento
- * Blog
+* Animal Management - AM
+    * Temporary Home - TH (v0.1)
+    * Shelters - SH (v0.1)
+* Donations Management - DM
+    * Sponsorship - SP (v0.1)
+    * Donations in cash - DC (v0.1)
+    * Product Donations - PD
+    * Raffle - RA
+* Attract - AT
+    * Voluntary/temporary home - VT (v0.1)
+    * E-mail marketing - EM
+* Accounting Control - AC
+    * Accounting Flow - AF (v0.1)
+    * Accountability - CC (v0.1)
+* Inventory control - IC
+    * Products - PR
+* Store - ST
+    * Stock / No stock - SN
+    * Monitoring - MO
+* Blog - BL
 
 
-#### Contribuidores
+#### Contributors
 ---------------------
 * ...
 
@@ -40,6 +40,7 @@ Software opensource para gerenciamento e divulgação de adoção de animais.
 ---------------------
 ...
 
-#### Licença
+#### License
 ---------------------
 This project is released under the [MIT License](https://opensource.org/licenses/MIT).
+We're using code under other licenses, please take notice and respect them.
