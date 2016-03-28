@@ -43,4 +43,7 @@ Open source software for management and dissemination of pet adoption.
 #### License
 ---------------------
 This project is released under the [MIT License](https://opensource.org/licenses/MIT).
+
 We're using code under other licenses, please take notice and respect them.
+
+[Admin Template](https://github.com/puikinsh/gentelella) - Project is developed and maintained by [Colorlib](https://colorlib.com/) and Aigars Silkalns
