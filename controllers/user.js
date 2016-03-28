@@ -6,8 +6,8 @@ var UserController = {
       if (err)
         res.send(err);
 
-      //res.json(users);
-      res.render('users/index', { users: users });
+      res.json(users);
+      //res.render('users/index', { users: users });
     });
   },
   show: function(req, res) {
@@ -15,12 +15,17 @@ var UserController = {
       if (err)
         res.send(err);
 
+      var teste = [];
+      teste.forEach(f, context)
+
       //res.json(user);
       res.render('users/show', { user: user });
     });
   },
   create: function(req, res) {
     var user = new User();
+
+    console.log(req.body.email);
 
     user.local.email = req.body.email;
     user.local.password = req.body.password;
