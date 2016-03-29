@@ -15,9 +15,6 @@ var UserController = {
       if (err)
         res.send(err);
 
-      var teste = [];
-      teste.forEach(f, context)
-
       //res.json(user);
       res.render('users/show', { user: user });
     });
