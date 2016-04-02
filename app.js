@@ -57,11 +57,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //- Routes ----------------------------------------
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+require('./routes.js')(app); //, passport);
 
-app.use('/', routes);
-app.use('/users', users);
+// var routes = require('./routes/index');
+// var users = require('./routes/users');
+
+// app.use('/', routes);
+// app.use('/users', users);
+// app.use('/users/:id', users);
 
 //- End Routes ------------------------------------
 

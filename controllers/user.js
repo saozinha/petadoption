@@ -15,23 +15,23 @@ var UserController = {
       if (err)
         res.send(err);
 
-      //res.json(user);
-      res.render('users/show', { user: user });
+      res.json(user);
+      //res.render('users/show', { user: user });
     });
   },
   create: function(req, res) {
     var user = new User();
 
-    console.log(req.body.email);
+    for (var key in req.body) {
+      user[key] = req.body[key];
+    }
 
-    user.local.email = req.body.email;
-    user.local.password = req.body.password;
-      
-    user.save(function(err) {
+    user.save(function(err, user) {
       if (err)
         res.send(err);
 
-      res.json({ message: 'user created!' });
+      res.json(user);
+      //res.json({ message: 'user created!' });
     });
   },
   update: function(req, res) {
@@ -39,24 +39,62 @@ var UserController = {
       if (err)
         res.send(err);
 
-      // update the users info
-      user.local.email = req.body.email;
-      user.local.password = req.body.password;
-      
+      for (var key in req.body) {
+        user[key] = req.body[key];
+      }
+
       user.save(function(err) {
         if (err)
           res.send(err);
 
-        res.json({ message: 'User updated!' });
+        res.json(user);
+        //res.json({ message: 'User updated!' });
+      });
+    });
+  },
+  patch: function(req, res) {
+    User.findById(req.params.id, function(err, user) {
+      if (err)
+        res.send(err);
+
+      var op = req.body.op;
+      var path = req.body.path.substring(1);
+      var value = req.body.value;
+
+      switch(op) {
+        case 'replace':
+          user[path] = value;
+          break;
+        /*
+        case 'add':
+          break;
+        case 'remove':
+          break;
+        case 'move':
+          break;
+        case 'copy':
+          break;
+        case 'test':
+          break;
+        */
+      }
+
+      user.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json(user);
+        //res.json({ message: 'User updated!' });
       });
     });
   },
   destroy: function(req, res) {
-    User.remove({_id: req.params.id}, function(err, user) {
+    User.remove({_id: req.params.id}, function(err, removed) {
       if (err)
         res.send(err);
 
-      res.json({ message: 'Successfully deleted' });
+      res.json(removed); //qtt of removed users
+      //res.json({ message: 'Successfully deleted' });
     });
   }
 };
