@@ -9,6 +9,7 @@ var user = require('./../controllers/user');
 // });
 
 router.get('/', user.index);
-router.post('/', user.create);
+router.get(':id', user.show);
+//router.post('/', user.create);
 
 module.exports = router;
