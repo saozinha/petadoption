@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //- Routes ----------------------------------------
 
-require('./routes.js')(app); //, passport);
+require('./routes.js')(app, passport);
 
 // var routes = require('./routes/index');
 // var users = require('./routes/users');
