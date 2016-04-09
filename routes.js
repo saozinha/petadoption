@@ -1,6 +1,18 @@
 var user = require('./controllers/user');
+var dashboard = require('./controllers/dashboard');
 //
 module.exports = function(app, passport) {
+  // =====================================
+  // Dashboard ===========================
+  // =====================================
+  //
+  app.get('/dashboard', isLoggedIn, dashboard.index);
+  // app.get('/users/:id', user.show);
+  // app.post('/users', user.create);
+  // app.put('/users/:id', user.update);
+  // app.patch('/users/:id', user.patch);
+  // app.delete('/users/:id', user.destroy);
+  //
   // =====================================
   // User ================================
   // =====================================
@@ -15,11 +27,11 @@ module.exports = function(app, passport) {
   // =====================================
   // HOME PAGE (with login links) ========
   // =====================================
-  app.get('/manager', function(req, res) {
+  app.get('/', function(req, res) {
     if (req.isAuthenticated()) {
-      res.redirect('/users/show');
+      res.redirect('/dashboard');
     } else {
-      res.render('manager', { message: req.flash('loginMessage') }); 
+      res.render('index', { message: req.flash('loginMessage') }); 
     }
   });
   // =====================================
@@ -27,7 +39,7 @@ module.exports = function(app, passport) {
   // =====================================
   // show the signup form
   app.get('/signup', function(req, res) {
-    res.render('manager', { message: req.flash('signupMessage') });
+    res.render('index', { message: req.flash('signupMessage') });
   });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
@@ -40,12 +52,12 @@ module.exports = function(app, passport) {
   // =====================================
   // show the login form
   app.get('/login', function(req, res) {
-    res.render('manager', { message: req.flash('signupMessage') });
+    res.render('index', { message: req.flash('loginMessage') });
   });
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/manager', // redirect back to the signup page if there is an error
+    successRedirect : '/', // redirect to the secure profile section
+    failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
   // =====================================
@@ -101,9 +113,9 @@ module.exports = function(app, passport) {
   // =====================================
   app.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/manager');
+    res.redirect('/');
   });
-  
+
 };
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -111,5 +123,5 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
   // if they aren't redirect them to the home page
-  res.redirect('/manager');
+  res.redirect('/');
 }
