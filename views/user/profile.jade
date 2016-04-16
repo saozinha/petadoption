@@ -1,0 +1,174 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_title
+            h2
+              | Complete your profile 
+              //- small Sessions
+            .clearfix
+          .x_content
+            // Smart Wizard
+            //-
+              p
+                | This is a basic form wizard example that inherits the colors from the selected scheme.
+            #wizard.form_wizard.wizard_horizontal
+              ul.wizard_steps
+                li
+                  a(href='#step-1')
+                    span.step_no 1
+                    span.step_descr
+                      | Step 1
+                      br
+                      small Personal
+                li
+                  a(href='#step-2')
+                    span.step_no 2
+                    span.step_descr
+                      | Step 2
+                      br
+                      small Organization
+                li
+                  a(href='#step-3')
+                    span.step_no 3
+                    span.step_descr
+                      | Step 3
+                      br
+                      small Shelters
+              #step-1
+                form.form-horizontal.form-label-left
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                      | Name 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='indentification')
+                      | Identification
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#Identification.form-control.col-md-7.col-xs-12(type='text', name='Identification', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12 
+                      | Gender
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      #gender.btn-group(data-toggle='buttons')
+                        | M: 
+                        input#genderM.flat(type='radio', name='gender', value='M')
+                        | 
+                        | F: 
+                        input#genderF.flat(type='radio', name='gender', value='F', checked='', required='')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12
+                      | Date Of Birth 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#birthday.date-picker.form-control.col-md-7.col-xs-12(required='required', type='text')
+              #step-2
+                form.form-horizontal.form-label-left
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                      | Name 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                      | Capacity 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                      | Country 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#country.form-control.col-md-7.col-xs-12(type='text', name='country', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                      | State 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#state.form-control.col-md-7.col-xs-12(type='text', name='state', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                      | City 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#city.form-control.col-md-7.col-xs-12(type='text', name='city', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                      | Street 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#street.form-control.col-md-7.col-xs-12(type='text', name='street', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                      | Number 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#number.form-control.col-md-7.col-xs-12(type='text', name='number', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                      | Complement 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement', required='required')
+              #step-3
+                p 
+                  i.fa.fa-caret-square-o-right
+                form.form-horizontal.form-label-left
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                      | Name 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                      | Capacity 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                      | Country 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#country.form-control.col-md-7.col-xs-12(type='text', name='country', required='required')
+
+            // End SmartWizard Content
+
+block javascript
+  // bootstrap progress js
+  script(src='js/progressbar/bootstrap-progressbar.min.js')
+  // icheck
+  script(src='js/icheck/icheck.min.js')
+  script(src='js/custom.js')
+  // form wizard
+  script(type='text/javascript', src='js/wizard/jquery.smartWizard.js')
+  // pace
+  script(src='js/pace/pace.min.js')
+  script(type='text/javascript').
+    $(document).ready(function() {
+    // Smart Wizard
+    $('#wizard').smartWizard();
+    function onFinishCallback() {
+    $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+    //alert('Finish Clicked');
+    }
+    });
+    $(document).ready(function() {
+    // Smart Wizard
+    $('#wizard_verticle').smartWizard({
+    transitionEffect: 'slide'
+    });
+    });
