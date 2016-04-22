@@ -44,6 +44,7 @@ var userSchema = mongoose.Schema({
     number: {type: String, trim: true, required: false},
     complement: {type: String, trim: true, required: false}
   }],
+  stage: {type: Number, default: 0},
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
 });
