@@ -11,9 +11,9 @@ chai.use(chaiHttp);
 
 
 describe('User', function() {
-  
+
   User.collection.drop();
-  
+
   beforeEach(function(done){
     var address = {
       country: 'Brazil',
@@ -44,12 +44,12 @@ describe('User', function() {
       done();
     });
   });
-  
+
   afterEach(function(done){
     User.collection.drop();
     done();
   });
-   
+
   it('should list ALL users on /users GET', function(done) {
     chai.request(server)
       .get('/users')
