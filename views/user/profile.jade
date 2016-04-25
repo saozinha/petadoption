@@ -38,10 +38,10 @@ block page
                       | Step 3
                       br
                       small Shelters
-              #step-1
-                span.section Personal Info
+              form.form-horizontal.form-label-left
+                #step-1
+                  span.section Personal Info
 
-                form.form-horizontal.form-label-left
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                       | Name 
@@ -71,10 +71,10 @@ block page
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
                       input#birthday.date-picker.form-control.col-md-7.col-xs-12(required='required', type='text')
-              #step-2
-                span.section Organization Info
+                #step-2
+                  span.section Organization Info
 
-                form.form-horizontal.form-label-left
+                  //- form.form-horizontal.form-label-left
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                       | Name 
@@ -123,17 +123,17 @@ block page
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
                       input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement', required='required')
-              #step-3
-                span.section Shelters Info
+                #step-3
+                  span.section Shelters Info
 
-                p 
-                  a#addScnt(href='#')
-                    i.fa.fa-plus-square &nbsp;
-                    | Add Shelter
+                  p 
+                    a#addScnt(href='#')
+                      i.fa.fa-plus-square &nbsp;
+                      | Add Shelter
 
-                #p_scents
+                  #p_scents
 
-                  form.form-horizontal.form-label-left
+                    //- form.form-horizontal.form-label-left
                     div#fItem
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
@@ -307,12 +307,53 @@ block javascript
 
     $(document).ready(function() {
       // Smart Wizard
-      $('#wizard').smartWizard();
+      //- $('#wizard').smartWizard();
       
-      function onFinishCallback() {
-        $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-        alert('Finish Clicked');
+      //- function onFinishCallback() {
+      //-   $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+      //-   alert('Finish Clicked');
+      //- }
+
+      $('#wizard').smartWizard({
+        onLeaveStep:leaveAStepCallback,
+        onFinish:onFinishCallback
+      });
+
+      function leaveAStepCallback(obj, context){
+        alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
+        return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation 
+        //return true;
       }
+
+      function onFinishCallback(objs, context){
+        if(validateAllSteps(context.fromStep)){
+          $('form').submit();
+        }
+      }
+
+      // Your Step validation logic
+      function validateSteps(stepnumber){
+        var isStepValid = true;
+        // validate step 1
+        if(stepnumber == 1){
+          // Your step validation logic
+          // set isStepValid = false if has errors
+        }else if(stepnumber == 2){
+
+        }else if(stepnumber == 3){
+
+        }
+        // ...   
+        return isStepValid;
+      }
+      function validateAllSteps(stepnumber){
+        var isStepValid = true;
+
+        isStepValid = validateSteps(stepnumber);
+
+        return isStepValid;
+      }    
+
     });
     $(document).ready(function() {
       // Smart Wizard
