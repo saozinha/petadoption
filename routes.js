@@ -37,6 +37,18 @@ module.exports = function(app, passport) {
   app.put('/users/:id', user.update);
   app.patch('/users/:id', user.patch);
   app.delete('/users/:id', user.destroy);
+
+  // =====================================
+  // Animal ==============================
+  // =====================================
+  //
+  // app.get('/animal', animal.index);
+  // app.get('/animal/:id', animal.show);
+  // app.post('/animal', animal.create);
+  // app.put('/animal/:id', animal.update);
+  // app.patch('/animal/:id', animal.patch);
+  // app.delete('/animal/:id', animal.destroy);
+
   //
   // =====================================
   // HOME PAGE (with login links) ========

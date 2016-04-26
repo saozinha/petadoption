@@ -1,6 +1,7 @@
 var User = require('./../models/user');
 
 var DashboardController = {
+
   index: function(req, res) {
     User.find({ flActive: true }, function(err, users) {
       if (err)
