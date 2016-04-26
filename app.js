@@ -10,26 +10,26 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+var app = express();
+
 //- DB Connection ---------------------------------
 
 var configDB = require('./config/database.js');
 
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(configDB.mongoURI[app.settings.env]); // connect to our database
 
 //console.log(mongoose.connection.readyState);
 
 mongoose.connection.on('open', function (ref) {
-  console.log('Connected to mongo server.');
+  console.log('Connected to mongo server: ' + configDB.mongoURI[app.settings.env]);
 });
 
 mongoose.connection.on('error', function (err) {
-  console.log('Could not connect to mongo server!');
+  console.log('Could not connect to mongo server: ' + configDB.mongoURI[app.settings.env]);
   console.log(err);
 });
 
 //- End DB Connection -----------------------------
-
-var app = express();
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -57,11 +57,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //- Routes ----------------------------------------
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+require('./routes.js')(app, passport);
 
-app.use('/', routes);
-app.use('/users', users);
+// var routes = require('./routes/index');
+// var users = require('./routes/users');
+
+// app.use('/', routes);
+// app.use('/users', users);
+// app.use('/users/:id', users);
 
 //- End Routes ------------------------------------
 
@@ -75,6 +78,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    app.locals.pretty = true;
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {

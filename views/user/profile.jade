@@ -1,0 +1,363 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_title
+            h2
+              | Complete your profile 
+              //- small Sessions
+            .clearfix
+          .x_content
+            // Smart Wizard
+            #wizard.form_wizard.wizard_horizontal
+              ul.wizard_steps
+                li
+                  a(href='#step-1')
+                    span.step_no 1
+                    span.step_descr
+                      | Step 1
+                      br
+                      small Personal
+                li
+                  a(href='#step-2')
+                    span.step_no 2
+                    span.step_descr
+                      | Step 2
+                      br
+                      small Organization
+                li
+                  a(href='#step-3')
+                    span.step_no 3
+                    span.step_descr
+                      | Step 3
+                      br
+                      small Shelters
+              form.form-horizontal.form-label-left
+                #step-1
+                  span.section Personal Info
+
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                      | Name 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='indentification')
+                      | Identification
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#Identification.form-control.col-md-7.col-xs-12(type='text', name='Identification', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12 
+                      | Gender
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      #gender.btn-group(data-toggle='buttons')
+                        | M: 
+                        input#genderM.flat(type='radio', name='gender', value='M')
+                        | 
+                        | F: 
+                        input#genderF.flat(type='radio', name='gender', value='F', checked='', required='')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12
+                      | Date Of Birth 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#birthday.date-picker.form-control.col-md-7.col-xs-12(required='required', type='text')
+                #step-2
+                  span.section Organization Info
+
+                  //- form.form-horizontal.form-label-left
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                      | Name 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                      | Capacity 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                      | Country 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#country.form-control.col-md-7.col-xs-12(type='text', name='country', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                      | State 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#state.form-control.col-md-7.col-xs-12(type='text', name='state', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                      | City 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#city.form-control.col-md-7.col-xs-12(type='text', name='city', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                      | Street 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#street.form-control.col-md-7.col-xs-12(type='text', name='street', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                      | Number 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#number.form-control.col-md-7.col-xs-12(type='text', name='number', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                      | Complement 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement', required='required')
+                #step-3
+                  span.section Shelters Info
+
+                  p 
+                    a#addScnt(href='#')
+                      i.fa.fa-plus-square &nbsp;
+                      | Add Shelter
+
+                  #p_scents
+
+                    //- form.form-horizontal.form-label-left
+                    div#fItem
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                          | Name 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required' value='Healthy animals')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                          | Capacity 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                          | Country 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                          | State 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                          | City 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                          | Street 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                          | Number 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                          | Complement 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                    div#fItem
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                          | Name 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required', value='Quarantine animals')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                          | Capacity 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                          | Country 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                          | State 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                          | City 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                          | Street 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                          | Number 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                          | Complement 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                      a#remScnt(href="#") Remove
+                    div#fItem
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                          | Name 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required', value='Special adoptions')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                          | Capacity 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                          | Country 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                          | State 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                          | City 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                          | Street 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                          | Number 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                          | Complement 
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                      a#remScnt(href="#") Remove
+              // End SmartWizard Content
+
+block javascript
+  // bootstrap progress js
+  script(src='js/progressbar/bootstrap-progressbar.min.js')
+  // icheck
+  script(src='js/icheck/icheck.min.js')
+  script(src='js/custom.js')
+  // form wizard
+  script(type='text/javascript', src='js/wizard/jquery.smartWizard.js')
+  // pace
+  script(src='js/pace/pace.min.js')
+  script(type='text/javascript').
+    $(function() {
+      var scntDiv = $('#p_scents form');
+      var i = $('#p_scents #fItem').size() + 1;
+
+      function remove() {
+        //- console.log('remover');
+        if( i > 2 ) {
+          $(this).parents('div[id="fItem"]').remove()
+          i--;
+        }
+        return false;
+      }
+
+      function addLabel() {
+        $('<div id="fItem"><div class="form-group"><label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Name <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="name" type="text" name="name" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="name" type="text" name="capacity" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="country" class="control-label col-md-3 col-sm-3 col-xs-12">Country </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="country" type="text" name="country" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="state" class="control-label col-md-3 col-sm-3 col-xs-12">State </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="state" type="text" name="state" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="city" class="control-label col-md-3 col-sm-3 col-xs-12">City </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="city" type="text" name="city" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="street" class="control-label col-md-3 col-sm-3 col-xs-12">Street </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="street" type="text" name="street" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="number" class="control-label col-md-3 col-sm-3 col-xs-12">Number </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="number" type="text" name="number" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="complement" class="control-label col-md-3 col-sm-3 col-xs-12">Complement </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="complement" type="text" name="complement" class="form-control col-md-7 col-xs-12"></div></div><a id="remScnt" href="#">Remove</a></div>').appendTo(scntDiv);
+        i++;
+        //- console.log(i);
+        $('a[id="remScnt"]').off('click');
+        $('a[id="remScnt"]').on('click', remove);
+        return false;
+      }
+      //- console.log(i);
+      $('#addScnt').on("click", addLabel);
+      $('a[id="remScnt"]').off('click');
+      $('a[id="remScnt"]').on('click', remove);
+    });
+
+    $(document).ready(function() {
+      // Smart Wizard
+      //- $('#wizard').smartWizard();
+      
+      //- function onFinishCallback() {
+      //-   $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+      //-   alert('Finish Clicked');
+      //- }
+
+      $('#wizard').smartWizard({
+        onLeaveStep:leaveAStepCallback,
+        onFinish:onFinishCallback
+      });
+
+      function leaveAStepCallback(obj, context){
+        alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
+        return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation 
+        //return true;
+      }
+
+      function onFinishCallback(objs, context){
+        if(validateAllSteps(context.fromStep)){
+          $('form').submit();
+        }
+      }
+
+      // Your Step validation logic
+      function validateSteps(stepnumber){
+        var isStepValid = true;
+        // validate step 1
+        if(stepnumber == 1){
+          // Your step validation logic
+          // set isStepValid = false if has errors
+        }else if(stepnumber == 2){
+
+        }else if(stepnumber == 3){
+
+        }
+        // ...   
+        return isStepValid;
+      }
+      function validateAllSteps(stepnumber){
+        var isStepValid = true;
+
+        isStepValid = validateSteps(stepnumber);
+
+        return isStepValid;
+      }    
+
+    });
+    $(document).ready(function() {
+      // Smart Wizard
+      $('#wizard_verticle').smartWizard({
+        transitionEffect: 'slide'
+      });
+    });

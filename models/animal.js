@@ -37,7 +37,7 @@ var animalSchema = new Schema({
     name: {type: String, trim: true, required: false}
   },
   createdDate: {type: Date, default: Date.now},
-  flActive: {type: Boolean, required: false}
+  flActive: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Animal', animalSchema);

@@ -1,0 +1,106 @@
+.col-md-3.left_col
+  .left_col.scroll-view
+    .navbar.nav_title(style='border: 0;')
+      a.site_title(href='index.html')
+        i.fa.fa-paw
+        &nbsp;
+        span Pet Adoption!  
+    .clearfix
+    // menu prile quick info
+    //-
+      .profile
+        .profile_pic
+          img.img-circle.profile_img(src='images/img.jpg', alt='...')
+        .profile_info
+          span Welcome,
+          h2 John Doe
+    // /menu prile quick info
+    // sidebar menu
+    #sidebar-menu.main_menu_side.hidden-print.main_menu
+      .menu_section
+        //- h3 General
+        ul.nav.side-menu
+          li
+            a(href='/dashboard')
+              i.fa.fa-bar-chart-o
+              | Dashboard
+          li
+            a(href='/pets')
+              i.fa.fa-paw
+              | Pets
+          li
+            a(href='/accounts')
+              i.fa.fa-usd
+              | Accountability
+          li
+            a(href='/attract')
+              i.fa.fa-users
+              | Attract
+          li
+            a
+              i.fa.fa-gear
+              | Settings
+              span.fa.fa-chevron-down
+            ul.nav.child_menu(style='display: none')
+              li
+                a(href='/users') Users
+              li
+                a(href='/site') Site Settings
+              li
+                a(href='/places') Temporary Places
+              li
+                a(href='/orgs') Organization
+      //-
+        .menu_section
+          h3 Live On
+          ul.nav.side-menu
+            li
+              a
+                i.fa.fa-bug
+                |  Additional Pages 
+                span.fa.fa-chevron-down
+              ul.nav.child_menu(style='display: none')
+                li
+                  a(href='e_commerce.html') E-commerce
+                li
+                  a(href='projects.html') Projects
+                li
+                  a(href='project_detail.html') Project Detail
+                li
+                  a(href='contacts.html') Contacts
+                li
+                  a(href='profile.html') Profile
+            li
+              a
+                i.fa.fa-windows
+                |  Extras 
+                span.fa.fa-chevron-down
+              ul.nav.child_menu(style='display: none')
+                li
+                  a(href='page_404.html') 404 Error
+                li
+                  a(href='page_500.html') 500 Error
+                li
+                  a(href='plain_page.html') Plain Page
+                li
+                  a(href='login.html') Login Page
+                li
+                  a(href='pricing_tables.html') Pricing Tables
+            li
+              a
+                i.fa.fa-laptop
+                |  Landing Page 
+                span.label.label-success.pull-right Coming Soon
+    // /sidebar menu
+    // /menu footer buttons
+    //-
+      .sidebar-footer.hidden-small
+        a(data-toggle='tooltip', data-placement='top', title='Settings')
+          span.glyphicon.glyphicon-cog(aria-hidden='true')
+        a(data-toggle='tooltip', data-placement='top', title='FullScreen')
+          span.glyphicon.glyphicon-fullscreen(aria-hidden='true')
+        a(data-toggle='tooltip', data-placement='top', title='Lock')
+          span.glyphicon.glyphicon-eye-close(aria-hidden='true')
+        a(data-toggle='tooltip', data-placement='top', title='Logout')
+          span.glyphicon.glyphicon-off(aria-hidden='true')
+    // /menu footer buttons
