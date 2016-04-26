@@ -10,7 +10,7 @@ var journalEntriesSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, required: false},
   files: [String],
   createdDate: {type: Date, default: Date.now},
-  flActive: {type: Boolean, required: false}
+  flActive: {type: Boolean, default: true}
 });
 
 function getCurrency (v) {

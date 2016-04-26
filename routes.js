@@ -1,6 +1,7 @@
-var user        = require('./controllers/user');
-// var animal      = require('./controllers/animal');
-var dashboard   = require('./controllers/dashboard');
+var dashboard = require('./controllers/dashboard');
+var user = require('./controllers/user');
+var organization = require('./controllers/organization');
+var shelter = require('./controllers/shelter');
 //
 module.exports = function(app, passport) {
   // =====================================
@@ -13,6 +14,18 @@ module.exports = function(app, passport) {
   // app.put('/users/:id', user.update);
   // app.patch('/users/:id', user.patch);
   // app.delete('/users/:id', user.destroy);
+  //
+  // =====================================
+  // Shelter =============================
+  // =====================================
+  //
+  app.post('/shelters', shelter.create);
+  // 
+  // =====================================
+  // Org =================================
+  // =====================================
+  //
+  app.post('/orgs', organization.create);
   //
   // =====================================
   // User ================================

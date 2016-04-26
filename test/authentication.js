@@ -111,7 +111,7 @@ describe('Authentication', function() {
               .send({'email':'user@user.com.br', 'password':'123456'})
               .end(function(err, res){
                 res.should.have.status(200);
-                res.redirects[0].should.equal('http://127.0.0.1:3000/profile');
+                res.redirects[0].should.equal('http://127.0.0.1:3000/');
                 done();
               });
         });
