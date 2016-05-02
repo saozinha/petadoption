@@ -32,7 +32,9 @@ describe('Profile', function() {
   });
   
   afterEach(function(done){
-    User.collection.drop();
+    //Shelter.collection.drop();
+    //Organization.collection.drop();
+    //User.collection.drop();
     done();
   });
    
@@ -156,7 +158,7 @@ describe('Profile', function() {
         newUser.gender = 'F';
         newUser.dateBorn = new Date('November 01, 1984 11:13:00');
 
-        var address = [{
+        var addresses = [{
           country: 'Brazil',
           state: 'Minas Gerais',
           city: 'Belo Horizonte',
@@ -169,67 +171,40 @@ describe('Profile', function() {
         var newOrg = Organization();
 
         newOrg.name = 'Organization 01';
-        newOrg.address = address;
+        newOrg.addresses = addresses;
 
         var newShelter1 = Shelter();
 
         newShelter1.name = 'Shelter 01';
         newShelter1.capacity = 10;
-        newShelter1.address = address;
+        newShelter1.address = addresses[0];
 
         var newShelter2 = Shelter();
 
         newShelter2.name = 'Shelter 02';
         newShelter2.capacity = 20;
-        newShelter2.address = address;
+        newShelter2.address = addresses[0];
 
-        var vetShelter = [];
+        var shelters = [];
 
-        vetShelter.push(newShelter1);
-        vetShelter.push(newShelter2);
+        shelters.push(newShelter1);
+        shelters.push(newShelter2);
         
-        console.log(newUser);
-        console.log(newOrg);
-        console.log(vetShelter);
+        // console.log(newUser);
+        // console.log(newOrg);
+        // console.log(vetShelter);
 
-        done();
-
-        // chai.request(server)
-        //   .post('/shelters')
-        //   .send(newShelter)
-        //   .end(function(err, res){
-        //     res.should.have.status(200);
-        //     res.should.be.json;
-        //     res.body.should.be.a('object');
-        //     res.body.should.have.property('_id');
-        //     res.body.should.have.property('organizationId');
-        //     res.body.should.have.property('name');
-        //     res.body.should.have.property('capacity');
-        //     res.body.should.have.property('address');
-        //     res.body.name.should.equal('Shelter 01');
-        //     done();
-        //   });
-
-        // chai.request(server)
-        //   .post('/orgs')
-        //   .send(newOrg)
-        //   .end(function(err, res){
-        //     res.should.have.status(200);
-        //     res.body.name.should.equal('Organization 01');
-        //     done();
-        //   });
-
-        // chai.request(server)
-        //   .put('/users/' + id)
-        //   .send(newUser)
-        //   .end(function(err, res){
-        //     res.should.have.status(200);
-        //     res.body.name.should.equal('Usuário Teste');
-        //     res.body.local.should.deep.equal({ password: '12345', email: 'usuarioteste@teste.com.br' });
-        //     res.body.identification.should.deep.equal({ code: '123456', type: 'CPF' });
-        //     res.body.gender.should.equal('F');
-        //     done();
-        //   });
+        chai.request(server)
+          .post('/profile')
+          .send({ 
+            user: newUser,
+            organization: newOrg,
+            shelter: shelters
+          })
+          .end(function(err, res){
+            res.should.have.status(200);
+            done();
+          });
 
       });
   });

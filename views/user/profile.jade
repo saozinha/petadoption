@@ -1,8 +1,8 @@
-extends ../shared/content
+extends ../shared/profile
 
 block stylesheet
 
-block page
+block content
   div
     .clearfix
     .row
@@ -38,7 +38,7 @@ block page
                       | Step 3
                       br
                       small Shelters
-              form.form-horizontal.form-label-left
+              form.form-horizontal.form-label-left(action='/profile', method="post")
                 #step-1
                   span.section Personal Info
 
@@ -47,13 +47,19 @@ block page
                       | Name 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='user[name]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='indentification')
-                      | Identification
+                      | Identification -> type
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#Identification.form-control.col-md-7.col-xs-12(type='text', name='Identification', required='required')
+                      input#Identification.form-control.col-md-7.col-xs-12(type='text', name='user[identification][type]', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='indentification')
+                      | Identification -> code
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#Identification.form-control.col-md-7.col-xs-12(type='text', name='user[identification][code]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12 
                       | Gender
@@ -61,68 +67,67 @@ block page
                     .col-md-6.col-sm-6.col-xs-12
                       #gender.btn-group(data-toggle='buttons')
                         | M: 
-                        input#genderM.flat(type='radio', name='gender', value='M')
+                        input#genderM.flat(type='radio', name='user[gender]', value='M')
                         | 
                         | F: 
-                        input#genderF.flat(type='radio', name='gender', value='F', checked='', required='')
+                        input#genderF.flat(type='radio', name='user[gender]', value='F', checked='', required='')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12
                       | Date Of Birth 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#birthday.date-picker.form-control.col-md-7.col-xs-12(required='required', type='text')
+                      input#birthday.date-picker.form-control.col-md-7.col-xs-12(type='text', name='user[dateBorn]', required='required', )
                 #step-2
                   span.section Organization Info
 
-                  //- form.form-horizontal.form-label-left
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                       | Name 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required')
-                  .form-group
-                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
-                      | Capacity 
-                      span.required *
-                    .col-md-6.col-sm-6.col-xs-12
-                      input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required')
+                      input#name.form-control.col-md-7.col-xs-12(type='text', name='organization[name]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                       | Country 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#country.form-control.col-md-7.col-xs-12(type='text', name='country', required='required')
+                      input#country.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][country]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
                       | State 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#state.form-control.col-md-7.col-xs-12(type='text', name='state', required='required')
+                      input#state.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][state]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
                       | City 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#city.form-control.col-md-7.col-xs-12(type='text', name='city', required='required')
+                      input#city.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][city]', required='required')
+                  .form-group
+                    label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                      | District 
+                      span.required *
+                    .col-md-6.col-sm-6.col-xs-12
+                      input#district.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][district]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
                       | Street 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#street.form-control.col-md-7.col-xs-12(type='text', name='street', required='required')
+                      input#street.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][street]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                       | Number 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#number.form-control.col-md-7.col-xs-12(type='text', name='number', required='required')
+                      input#number.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][number]', required='required')
                   .form-group
                     label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
                       | Complement 
                       span.required *
                     .col-md-6.col-sm-6.col-xs-12
-                      input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement', required='required')
+                      input#complement.form-control.col-md-7.col-xs-12(type='text', name='organization[addresses][0][complement]', required='required')
                 #step-3
                   span.section Shelters Info
 
@@ -132,94 +137,104 @@ block page
                       | Add Shelter
 
                   #p_scents
-
-                    //- form.form-horizontal.form-label-left
                     div#fItem
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                           | Name 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required' value='Healthy animals')
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][name]', required='required' value='Healthy animals')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                           | Capacity 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                          input#capacity.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][capacity]', required='required', value='5')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                           | Country 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][country]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
                           | State 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][state]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
                           | City 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][city]')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                          | district 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#district.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][district]', required='required')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
                           | Street 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][street]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                           | Number 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][number]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
                           | Complement 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='shelter[0][address][complement]')
                     div#fItem
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                           | Name 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required', value='Quarantine animals')
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][name]', required='required' value='Quarantine')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                           | Capacity 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                          input#capacity.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][capacity]', required='required', value='3')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                           | Country 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][country]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
                           | State 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][state]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
                           | City 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][city]')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                          | district 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#district.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][district]', required='required')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
                           | Street 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][street]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                           | Number 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][number]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
                           | Complement 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='shelter[1][address][complement]')
                       a#remScnt(href="#") Remove
                     div#fItem
                       .form-group
@@ -227,43 +242,49 @@ block page
                           | Name 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required', value='Special adoptions')
+                          input#name.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][name]', required='required' value='Special Adoptions')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                           | Capacity 
                           span.required *
                         .col-md-6.col-sm-6.col-xs-12
-                          input#name.form-control.col-md-7.col-xs-12(type='text', name='capacity', required='required', value='5')
+                          input#capacity.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][capacity]', required='required', value='2')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                           | Country 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#country.form-control.col-md-7.col-xs-12(type='text', name='country')
+                          input#country.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][country]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
                           | State 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#state.form-control.col-md-7.col-xs-12(type='text', name='state')
+                          input#state.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][state]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
                           | City 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#city.form-control.col-md-7.col-xs-12(type='text', name='city')
+                          input#city.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][city]')
+                      .form-group
+                        label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                          | district 
+                          span.required *
+                        .col-md-6.col-sm-6.col-xs-12
+                          input#district.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][district]', required='required')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
                           | Street 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#street.form-control.col-md-7.col-xs-12(type='text', name='street')
+                          input#street.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][street]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                           | Number 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#number.form-control.col-md-7.col-xs-12(type='text', name='number')
+                          input#number.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][number]')
                       .form-group
                         label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
                           | Complement 
                         .col-md-6.col-sm-6.col-xs-12
-                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='complement')
+                          input#complement.form-control.col-md-7.col-xs-12(type='text', name='shelter[2][address][complement]')
                       a#remScnt(href="#") Remove
               // End SmartWizard Content
 
@@ -279,28 +300,30 @@ block javascript
   script(src='js/pace/pace.min.js')
   script(type='text/javascript').
     $(function() {
-      var scntDiv = $('#p_scents form');
-      var i = $('#p_scents #fItem').size() + 1;
+      var scntDiv = $('#p_scents');
+      var i = $('#p_scents #fItem').size();
+      console.log('item: '+i);
 
       function remove() {
-        //- console.log('remover');
+        console.log('remover');
         if( i > 2 ) {
           $(this).parents('div[id="fItem"]').remove()
-          i--;
+          //- i--;
         }
         return false;
       }
 
       function addLabel() {
-        $('<div id="fItem"><div class="form-group"><label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Name <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="name" type="text" name="name" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="name" type="text" name="capacity" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="country" class="control-label col-md-3 col-sm-3 col-xs-12">Country </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="country" type="text" name="country" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="state" class="control-label col-md-3 col-sm-3 col-xs-12">State </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="state" type="text" name="state" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="city" class="control-label col-md-3 col-sm-3 col-xs-12">City </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="city" type="text" name="city" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="street" class="control-label col-md-3 col-sm-3 col-xs-12">Street </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="street" type="text" name="street" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="number" class="control-label col-md-3 col-sm-3 col-xs-12">Number </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="number" type="text" name="number" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="complement" class="control-label col-md-3 col-sm-3 col-xs-12">Complement </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="complement" type="text" name="complement" class="form-control col-md-7 col-xs-12"></div></div><a id="remScnt" href="#">Remove</a></div>').appendTo(scntDiv);
-        i++;
+        $('<div id="fItem"><div class="form-group"><label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Name <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="name" type="text" name="shelter['+ i +'][name]" required="required" value="" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="capacity" type="text" name="shelter['+ i +'][capacity]" required="required" value="" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="country" class="control-label col-md-3 col-sm-3 col-xs-12">Country </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="country" type="text" name="shelter['+ i +'][address][country]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="state" class="control-label col-md-3 col-sm-3 col-xs-12">State </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="state" type="text" name="shelter['+ i +'][address][state]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="city" class="control-label col-md-3 col-sm-3 col-xs-12">City </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="city" type="text" name="shelter['+ i +'][address][city]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="district" class="control-label col-md-3 col-sm-3 col-xs-12">district <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input id="district" type="text" name="shelter['+ i +'][address][district]" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="street" class="control-label col-md-3 col-sm-3 col-xs-12">Street </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="street" type="text" name="shelter['+ i +'][address][street]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="number" class="control-label col-md-3 col-sm-3 col-xs-12">Number </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="number" type="text" name="shelter['+ i +'][address][number]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="complement" class="control-label col-md-3 col-sm-3 col-xs-12">Complement </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="complement" type="text" name="shelter['+ i +'][address][complement]" class="form-control col-md-7 col-xs-12"></div></div><a id="remScnt" href="#">Remove</a></div>').appendTo(scntDiv);
         //- console.log(i);
+        i++;
         $('a[id="remScnt"]').off('click');
         $('a[id="remScnt"]').on('click', remove);
         return false;
       }
       //- console.log(i);
       $('#addScnt').on("click", addLabel);
+      //- $('#addScnt').on("click", function(){ console.log('teste'); });
       $('a[id="remScnt"]').off('click');
       $('a[id="remScnt"]').on('click', remove);
     });

@@ -1,3 +1,4 @@
+var Promise = require("bluebird");
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -9,6 +10,10 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+
+Promise.promisifyAll(mongoose.Model);
+Promise.promisifyAll(mongoose.Model.prototype);
+Promise.promisifyAll(mongoose.Query.prototype);
 
 var app = express();
 

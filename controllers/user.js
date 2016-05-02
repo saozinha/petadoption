@@ -20,6 +20,9 @@ var UserController = {
     });
   },
   create: function(req, res) {
+    if (err)
+      res.send(err);
+    
     var user = new User();
 
     for (var key in req.body) {
@@ -96,14 +99,15 @@ var UserController = {
       res.json(removed); //qtt of removed users
       //res.json({ message: 'Successfully deleted' });
     });
-  },
-  profile: function(req, res) {
-    if (req.user.stage !== 3){
-      res.render('user/profile', { user: req.user });
-    }else{
-      res.redirect('/dashboard');
-    }
   }
+  // ,
+  // profile: function(req, res) {
+  //   if (req.user.stage !== 3){
+  //     res.render('user/profile', { userActive: req.user });
+  //   }else{
+  //     res.redirect('/dashboard');
+  //   }
+  // }
 };
 
 module.exports = UserController;

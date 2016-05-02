@@ -37,6 +37,15 @@ body.nav-sm .main_container .top_nav {
     z-index: 2;
 }
 
+/**/
+body.nav-sm .main_container .top_navProfile {
+    padding: 0 !important;
+    display: block;
+    margin-left: 70px;
+    z-index: 2;
+}
+/**/
+
 body.nav-sm .nav.side-menu li a {
     text-align: center !important;
     font-weight: 400;
@@ -380,6 +389,15 @@ body {
     margin-left: 230px;
 }
 
+/**/
+.main_container .top_navProfile {
+    padding: 0 !important;
+    display: block;
+    padding: 10px 20px 0;
+    /*margin-left: 230px;*/
+}
+/**/
+
 .main_container {}
 
 .no-padding {
@@ -645,6 +663,36 @@ a:focus {
 .top_nav li a i {
     font-size: 15px
 }
+
+/**/
+.top_navProfile .navbar-right {
+    margin: 0;
+    width: 70%;
+    float: right;
+}
+
+.top_navProfile .navbar-right li {
+    display: inline-block;
+    float: right;
+}
+
+.top_navProfile .dropdown-menu {
+    min-width: 220px;
+}
+
+.top_navProfile .dropdown-menu li {
+    width: 100%;
+}
+
+.top_navProfile .dropdown-menu li a {
+    width: 100%;
+    padding: 12px 20px;
+}
+
+.top_navProfile li a i {
+    font-size: 15px
+}
+/**/
 
 .navbar-static-top {
     position: fixed;
