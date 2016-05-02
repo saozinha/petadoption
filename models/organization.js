@@ -1,4 +1,5 @@
-var mongoose     = require('mongoose');
+var mongoose = require('mongoose');
+
 var Schema       = mongoose.Schema;
 
 var organizationSchema = new Schema({
@@ -12,9 +13,9 @@ var organizationSchema = new Schema({
     number: {type: String, trim: true, required: false},
     complement: {type: String, trim: true, required: false}
   }],
-  shelter: [{
-    _id: {type: Schema.Types.ObjectId, required: false}
-  }],
+  // shelter: [{
+  //   _id: {type: Schema.Types.ObjectId, required: false}
+  // }],
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
 });

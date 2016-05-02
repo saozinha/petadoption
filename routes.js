@@ -2,8 +2,14 @@ var dashboard = require('./controllers/dashboard');
 var user = require('./controllers/user');
 var organization = require('./controllers/organization');
 var shelter = require('./controllers/shelter');
+var profile = require('./controllers/profile');
 //
 module.exports = function(app, passport) {
+
+  app.post('/teste', function(req, res){
+    console.log(req.body);
+    res.redirect('/dashboard');
+  });
   // =====================================
   // Dashboard ===========================
   // =====================================
@@ -91,7 +97,8 @@ module.exports = function(app, passport) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, user.profile);
+  app.get('/profile', profile.show);
+  app.post('/profile', isLoggedIn, profile.create);
   // =====================================
   // FACEBOOK ROUTES =====================
   // =====================================
