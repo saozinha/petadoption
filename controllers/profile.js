@@ -5,11 +5,11 @@ var async = require('async');
 
 var ProfileController = {
   show: function(req, res) {
-    // if (req.user.stage == 0){
+    if (req.user.stage == 0){
       res.render('user/profile');
-    // }else{
-    //   res.redirect('/dashboard');
-    // }
+    }else{
+      res.render('user/profile/' + req.user._id);
+    }
   },
   create: function(req, res) {
     User.findById(req.user._id).execAsync()
@@ -17,7 +17,7 @@ var ProfileController = {
       for (var key in req.body.user) {
         user[key] = req.body.user[key];
       }
-      // user['stage'] = 3;
+      user['stage'] = 1;
 
       return user.saveAsync();
     })
