@@ -61,9 +61,13 @@ module.exports = function(app, passport) {
   // =====================================
   app.get('/', function(req, res) {
     if (req.isAuthenticated()) {
-      res.redirect('/dashboard');
+      if (req.user.stage != 1){
+        res.redirect('/profile');
+      } else {
+        res.redirect('/dashboard');
+      }
     } else {
-      res.render('index', { message: req.flash('loginMessage') }); 
+      res.redirect('/login'); 
     }
   });
   // =====================================
@@ -75,7 +79,7 @@ module.exports = function(app, passport) {
   });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
@@ -97,8 +101,8 @@ module.exports = function(app, passport) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', profile.show);
-  app.post('/profile', isLoggedIn, profile.create);
+  app.get('/profile', isLoggedInProfile, profile.show);
+  app.post('/profile', isLoggedInProfile, profile.create);
   // =====================================
   // FACEBOOK ROUTES =====================
   // =====================================
@@ -149,8 +153,20 @@ module.exports = function(app, passport) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on 
-  if (req.isAuthenticated())
-    return next();
-  // if they aren't redirect them to the home page
-  res.redirect('/');
+  if (req.isAuthenticated()) {
+    if (req.user.stage != 1){
+      res.redirect('/profile');
+    } else {
+      return next();
+    }
+  } else {
+    res.redirect('/');
+  }
+}
+
+function isLoggedInProfile(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    else
+      res.redirect('/');
 }
