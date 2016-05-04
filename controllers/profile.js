@@ -4,12 +4,23 @@ var Shelter = require('./../models/shelter');
 var async = require('async');
 
 var ProfileController = {
-  show: function(req, res) {
+  index: function(req, res) {
     if (req.user.stage == 0){
-      res.render('user/profile');
+      res.render('profile/index');
     }else{
-      res.render('user/profile/' + req.user._id);
+      res.redirect('profile/' + req.user._id);
     }
+  },
+  show: function(req, res) {
+    User.findById(req.params.id).execAsync()
+    .then(function(user) {
+
+      res.render('profile/show', { user: user });
+    })
+    .catch(function(err){
+      console.log('error:', err);
+      return err;
+    });
   },
   create: function(req, res) {
     User.findById(req.user._id).execAsync()
@@ -44,7 +55,6 @@ var ProfileController = {
       return res.redirect('/dashboard'); 
     })
     .catch(function(err){
-      // just need one of these
       console.log('error:', err);
       return err;
     });
