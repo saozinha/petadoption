@@ -1,0 +1,388 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  //- p #{user}
+  div
+    .page-title
+      .title_left
+        h3 User Profile
+      .title_right
+        .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+          .input-group
+            input.form-control(type='text', placeholder='Search for...')
+            span.input-group-btn
+              button.btn.btn-default(type='button') Go!
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_title
+            h2
+              | User Report 
+              small Activity report
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a(href='#')
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a(href='#')
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            .col-md-3.col-sm-3.col-xs-12.profile_left
+              .profile_img
+                // end of image cropping
+                #crop-avatar
+                  // Current avatar
+                  .avatar-view(title='Change the avatar')
+                    img(src='../images/picture.jpg', alt='Avatar')
+                  // Cropping modal
+                  #avatar-modal.modal.fade(aria-hidden='true', aria-labelledby='avatar-modal-label', role='dialog', tabindex='-1')
+                    .modal-dialog.modal-lg
+                      .modal-content
+                        form.avatar-form(action='crop.php', enctype='multipart/form-data', method='post')
+                          .modal-header
+                            button.close(data-dismiss='modal', type='button') ×
+                            h4#avatar-modal-label.modal-title Change Avatar
+                          .modal-body
+                            .avatar-body
+                              // Upload image and data
+                              .avatar-upload
+                                input.avatar-src(name='avatar_src', type='hidden')
+                                input.avatar-data(name='avatar_data', type='hidden')
+                                label(for='avatarInput') Local upload
+                                input#avatarInput.avatar-input(name='avatar_file', type='file')
+                              // Crop and preview
+                              .row
+                                .col-md-9
+                                  .avatar-wrapper
+                                .col-md-3
+                                  .avatar-preview.preview-lg
+                                  .avatar-preview.preview-md
+                                  .avatar-preview.preview-sm
+                              .row.avatar-btns
+                                .col-md-9
+                                  .btn-group
+                                    button.btn.btn-primary(data-method='rotate', data-option='-90', type='button', title='Rotate -90 degrees') Rotate Left
+                                    button.btn.btn-primary(data-method='rotate', data-option='-15', type='button') -15deg
+                                    button.btn.btn-primary(data-method='rotate', data-option='-30', type='button') -30deg
+                                    button.btn.btn-primary(data-method='rotate', data-option='-45', type='button') -45deg
+                                  .btn-group
+                                    button.btn.btn-primary(data-method='rotate', data-option='90', type='button', title='Rotate 90 degrees') Rotate Right
+                                    button.btn.btn-primary(data-method='rotate', data-option='15', type='button') 15deg
+                                    button.btn.btn-primary(data-method='rotate', data-option='30', type='button') 30deg
+                                    button.btn.btn-primary(data-method='rotate', data-option='45', type='button') 45deg
+                                .col-md-3
+                                  button.btn.btn-primary.btn-block.avatar-save(type='submit') Done
+                          //
+                            <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                  // /.modal
+                  // Loading state
+                  .loading(aria-label='Loading', role='img', tabindex='-1')
+                // end of image cropping
+              h3 Samuel Doe
+              ul.list-unstyled.user_data
+                li
+                  i.fa.fa-map-marker.user-profile-icon
+                  |  San Francisco, California, USA
+                li
+                  i.fa.fa-briefcase.user-profile-icon
+                  |  Software Engineer
+                li.m-top-xs
+                  i.fa.fa-external-link.user-profile-icon
+                  a(href='http://www.kimlabs.com/profile/', target='_blank') www.kimlabs.com
+              a.btn.btn-success
+                i.fa.fa-edit.m-right-xs
+                | Edit Profile
+              br
+              // start skills
+              h4 Skills
+              ul.list-unstyled.user_data
+                li
+                  p Web Applications
+                  .progress.progress_sm
+                    .progress-bar.bg-green(role='progressbar', data-transitiongoal='50')
+                li
+                  p Website Design
+                  .progress.progress_sm
+                    .progress-bar.bg-green(role='progressbar', data-transitiongoal='70')
+                li
+                  p Automation & Testing
+                  .progress.progress_sm
+                    .progress-bar.bg-green(role='progressbar', data-transitiongoal='30')
+                li
+                  p UI / UX
+                  .progress.progress_sm
+                    .progress-bar.bg-green(role='progressbar', data-transitiongoal='50')
+              // end of skills
+            .col-md-9.col-sm-9.col-xs-12
+              .profile_title
+                .col-md-6
+                  h2 User Activity Report
+                .col-md-6
+                  #reportrange.pull-right(style='margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED')
+                    i.glyphicon.glyphicon-calendar.fa.fa-calendar
+                    span December 30, 2014 - January 28, 2015
+                    b.caret
+              // start of user-activity-graph
+              #graph_bar(style='width:100%; height:280px;')
+              // end of user-activity-graph
+              div(role='tabpanel', data-example-id='togglable-tabs')
+                ul#myTab.nav.nav-tabs.bar_tabs(role='tablist')
+                  li.active(role='presentation')
+                    a#home-tab(href='#tab_content1', role='tab', data-toggle='tab', aria-expanded='true') Recent Activity
+                  li(role='presentation')
+                    a#profile-tab(href='#tab_content2', role='tab', data-toggle='tab', aria-expanded='false') Projects Worked on
+                  li(role='presentation')
+                    a#profile-tab2(href='#tab_content3', role='tab', data-toggle='tab', aria-expanded='false') Profile
+                #myTabContent.tab-content
+                  #tab_content1.tab-pane.fade.active.in(role='tabpanel', aria-labelledby='home-tab')
+                    // start recent activity
+                    ul.messages
+                      li
+                        img.avatar(src='../images/img.jpg', alt='Avatar')
+                        .message_date
+                          h3.date.text-info 24
+                          p.month May
+                        .message_wrapper
+                          h4.heading Desmond Davison
+                          blockquote.message
+                            | Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.
+                          br
+                          p.url
+                            span.fs1.text-info(aria-hidden='true', data-icon='')
+                            a(href='#')
+                              i.fa.fa-paperclip
+                              |  User Acceptance Test.doc
+                      li
+                        img.avatar(src='../images/img.jpg', alt='Avatar')
+                        .message_date
+                          h3.date.text-error 21
+                          p.month May
+                        .message_wrapper
+                          h4.heading Brian Michaels
+                          blockquote.message
+                            | Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.
+                          br
+                          p.url
+                            span.fs1(aria-hidden='true', data-icon='')
+                            a(href='#', data-original-title='') Download
+                      li
+                        img.avatar(src='../images/img.jpg', alt='Avatar')
+                        .message_date
+                          h3.date.text-info 24
+                          p.month May
+                        .message_wrapper
+                          h4.heading Desmond Davison
+                          blockquote.message
+                            | Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.
+                          br
+                          p.url
+                            span.fs1.text-info(aria-hidden='true', data-icon='')
+                            a(href='#')
+                              i.fa.fa-paperclip
+                              |  User Acceptance Test.doc
+                      li
+                        img.avatar(src='../images/img.jpg', alt='Avatar')
+                        .message_date
+                          h3.date.text-error 21
+                          p.month May
+                        .message_wrapper
+                          h4.heading Brian Michaels
+                          blockquote.message
+                            | Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.
+                          br
+                          p.url
+                            span.fs1(aria-hidden='true', data-icon='')
+                            a(href='#', data-original-title='') Download
+                    // end recent activity
+                  #tab_content2.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
+                    // start user projects
+                    table.data.table.table-striped.no-margin
+                      thead
+                        tr
+                          th #
+                          th Project Name
+                          th Client Company
+                          th.hidden-phone Hours Spent
+                          th Contribution
+                      tbody
+                        tr
+                          td 1
+                          td New Company Takeover Review
+                          td Deveint Inc
+                          td.hidden-phone 18
+                          td.vertical-align-mid
+                            .progress
+                              .progress-bar.progress-bar-success(data-transitiongoal='35')
+                        tr
+                          td 2
+                          td New Partner Contracts Consultanci
+                          td Deveint Inc
+                          td.hidden-phone 13
+                          td.vertical-align-mid
+                            .progress
+                              .progress-bar.progress-bar-danger(data-transitiongoal='15')
+                        tr
+                          td 3
+                          td Partners and Inverstors report
+                          td Deveint Inc
+                          td.hidden-phone 30
+                          td.vertical-align-mid
+                            .progress
+                              .progress-bar.progress-bar-success(data-transitiongoal='45')
+                        tr
+                          td 4
+                          td New Company Takeover Review
+                          td Deveint Inc
+                          td.hidden-phone 28
+                          td.vertical-align-mid
+                            .progress
+                              .progress-bar.progress-bar-success(data-transitiongoal='75')
+                    // end user projects
+                  #tab_content3.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
+                    p
+                      | xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
+                      | photo booth letterpress, commodo enim craft beer mlkshk
+
+block javascript
+  // image cropping
+  script(src='../js/cropping/cropper.min.js')
+  script(src='../js/cropping/main.js')
+  // daterangepicker
+  script(type='text/javascript', src='../js/moment/moment.min.js')
+  script(type='text/javascript', src='../js/datepicker/daterangepicker.js')
+  // chart js
+  script(src='../js/chartjs/chart.min.js')
+  // moris js
+  script(src='../js/moris/raphael-min.js')
+  script(src='../js/moris/morris.min.js')
+  // pace
+  script(src='../js/pace/pace.min.js')
+  script.
+    $(function() {
+      var day_data = [{
+        "period": "Jan",
+        "Hours worked": 80
+        }, {
+        "period": "Feb",
+        "Hours worked": 125
+        }, {
+        "period": "Mar",
+        "Hours worked": 176
+        }, {
+        "period": "Apr",
+        "Hours worked": 224
+        }, {
+        "period": "May",
+        "Hours worked": 265
+        }, {
+        "period": "Jun",
+        "Hours worked": 314
+        }, {
+        "period": "Jul",
+        "Hours worked": 347
+        }, {
+        "period": "Aug",
+        "Hours worked": 287
+        }, {
+        "period": "Sep",
+        "Hours worked": 240
+        }, {
+        "period": "Oct",
+        "Hours worked": 211
+        }];
+      Morris.Bar({
+        element: 'graph_bar',
+        data: day_data,
+        xkey: 'period',
+        hideHover: 'auto',
+        barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+        ykeys: ['Hours worked', 'sorned'],
+        labels: ['Hours worked', 'SORN'],
+        xLabelAngle: 60
+      });
+    });
+    // datepicker
+  script(type='text/javascript').
+    $(document).ready(function() {
+      var cb = function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
+      }
+      var optionSet1 = {
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+        minDate: '01/01/2012',
+        maxDate: '12/31/2015',
+        dateLimit: {
+          days: 60
+        },
+        showDropdowns: true,
+        showWeekNumbers: true,
+        timePicker: false,
+        timePickerIncrement: 1,
+        timePicker12Hour: true,
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        opens: 'left',
+        buttonClasses: ['btn btn-default'],
+        applyClass: 'btn-small btn-primary',
+        cancelClass: 'btn-small',
+        format: 'MM/DD/YYYY',
+        separator: ' to ',
+        locale: {
+          applyLabel: 'Submit',
+          cancelLabel: 'Clear',
+          fromLabel: 'From',
+          toLabel: 'To',
+          customRangeLabel: 'Custom',
+          daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          firstDay: 1
+        }
+      };
+      $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+      $('#reportrange').daterangepicker(optionSet1, cb);
+      $('#reportrange').on('show.daterangepicker', function() {
+        console.log("show event fired");
+      });
+      $('#reportrange').on('hide.daterangepicker', function() {
+        console.log("hide event fired");
+      });
+      $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+        console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+      });
+      $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+        console.log("cancel event fired");
+      });
+      $('#options1').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+      });
+      $('#options2').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+      });
+      $('#destroy').click(function() {
+        $('#reportrange').data('daterangepicker').remove();
+      });
+    });
+    // /datepicker
