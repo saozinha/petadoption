@@ -929,7 +929,7 @@ footer {
     background: #fff;
     padding: 5px 20px 0;
     height: 45px;
-    margin: 0 -17px;
+    /*margin: 0 -17px;*/
 }
 
 .tile-stats.sparkline {
