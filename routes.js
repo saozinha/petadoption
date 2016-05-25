@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
   // User ================================
   // =====================================
   //
-  app.get('/users', user.index);
+  app.get('/users', isLoggedIn, user.index);
   app.get('/users/:id', user.show);
   app.post('/users', user.create);
   app.put('/users/:id', user.update);

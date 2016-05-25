@@ -20,9 +20,6 @@ var UserController = {
     });
   },
   create: function(req, res) {
-    if (err)
-      res.send(err);
-    
     var user = new User();
 
     for (var key in req.body) {
