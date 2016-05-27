@@ -25,13 +25,13 @@ module.exports = function(app, passport) {
   // Shelter =============================
   // =====================================
   //
-  app.post('/shelters', shelter.create);
+  app.post('/shelters', isLoggedIn, shelter.create);
   // 
   // =====================================
   // Org =================================
   // =====================================
   //
-  app.post('/orgs', organization.create);
+  app.post('/orgs', isLoggedIn, organization.create);
   //
   // =====================================
   // User ================================

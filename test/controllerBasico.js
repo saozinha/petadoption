@@ -427,7 +427,7 @@ describe('User', function() {
           .then(function (res) {
             res.should.have.status(200);
             agent.delete('/users/' + res.body[0]._id)
-              .end(function(error, res){
+              .then(function(res){
                 res.should.have.status(200);  
                 res.should.be.json;
                 res.body.should.be.a('Number');
