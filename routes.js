@@ -38,11 +38,11 @@ module.exports = function(app, passport) {
   // =====================================
   //
   app.get('/users', isLoggedIn, user.index);
-  app.get('/users/:id', user.show);
-  app.post('/users', user.create);
-  app.put('/users/:id', user.update);
-  app.patch('/users/:id', user.patch);
-  app.delete('/users/:id', user.destroy);
+  app.get('/users/:id', isLoggedIn, user.show);
+  app.post('/users', isLoggedIn, user.create);
+  app.put('/users/:id', isLoggedIn, user.update);
+  app.patch('/users/:id', isLoggedIn, user.patch);
+  app.delete('/users/:id', isLoggedIn, user.destroy);
 
   // =====================================
   // Animal ==============================
