@@ -31,7 +31,9 @@ module.exports = function(app, passport) {
   // Org =================================
   // =====================================
   //
+  app.get('/orgs/:id', isLoggedIn, organization.show);
   app.post('/orgs', isLoggedIn, organization.create);
+  app.put('/orgs/:id', isLoggedIn, organization.update);
   //
   // =====================================
   // User ================================

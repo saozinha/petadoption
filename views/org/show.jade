@@ -1,0 +1,86 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          //- 
+            .x_title
+              h2
+                | Form validation 
+                small sub title
+              .clearfix
+          .x_content
+            form.form-horizontal.form-label-left(action='/orgs/' + org._id, method="post", novalidate='')
+              input(type='hidden', name="_method", value="PUT")
+              input(type='hidden', name="_id", value="#{org._id}")
+              span.section Organization
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                  | Name 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='name', placeholder='Organization name', required='required', type='text', value='#{org.name}')
+              .ln_solid
+              .form-group
+                .col-md-6.col-md-offset-3
+                  button.btn.btn-primary(type='') Cancel
+                  button#send.btn.btn-success(type='submit') Submit
+
+block javascript
+  // form validation
+  //- script(src='../js/validator/validator.js')
+  script.
+    // initialize the validator function
+    //- validator.message['date'] = 'not a real date';
+    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+    //- $('form')
+    //- .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+    //- .on('change', 'select.required', validator.checkField)
+    //- .on('keypress', 'input[required][pattern]', validator.keypress);
+    //- $('.multi.required')
+    //- .on('keyup blur', 'input', function() {
+    //-   validator.checkField.apply($(this).siblings().last()[0]);
+    //- });
+    // bind the validation to the form submit event
+    //$('#send').click('submit');//.prop('disabled', true);
+    $('form').submit(function(e) {
+      e.preventDefault();
+      var submit = true;
+
+      if (submit){
+        return this.submit();
+      } else {
+        return false;
+      }
+    });
+
+    //- $('form').submit(function(e) {
+    //-   console.log("sdafasdf");
+    //-   e.preventDefault();
+    //-   var submit = true;
+    //-   // evaluate the form using generic validaing
+    //-   //- if (!validator.checkAll($(this))) {
+    //-   //-   submit = false;
+    //-   //- }
+
+    //-   console.log("teste");
+
+    //-   if (submit)
+    //-     this.submit();
+    //-   return false;
+    //- });
+    /* FOR DEMO ONLY */
+
+    //- $('#vfields').change(function() {
+    //-   $('form').toggleClass('mode2');
+    //- }).prop('checked', false);
+    //- $('#alerts').change(function() {
+    //-   validator.defaults.alerts = (this.checked) ? false : true;
+    //-   if (this.checked)
+    //-     $('form .alert').remove();
+    //- }).prop('checked', false);
