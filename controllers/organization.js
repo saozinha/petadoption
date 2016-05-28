@@ -1,32 +1,45 @@
+var Promise = require('bluebird');
 var Organization = require('./../models/organization');
+var User = require('./../models/user');
 
 var OrganizationController = {
   // index: function(req, res) {
-  //   User.find({ flActive: true }, function(err, users) {
-  //     if (err)
-  //       res.send(err);
-
-  //     res.json(users);
-  //     //res.render('users/index', { users: users });
-  //   });
   // },
-  // show: function(req, res) {
-  //   User.findById(req.params.id, function(err, user) {
-  //     if (err)
-  //       res.send(err);
-
-  //     res.json(user);
-  //     //res.render('users/show', { user: user });
-  //   });
-  // },
-  create: function(req, res) {
+  show: (req, res) => {
+    Promise.all([
+      User.findById(req.user._id).execAsync()
+      .then((user) => {
+        return user;
+      })
+      .catch((err) => {
+        throw err;
+      }),
+      Organization.findById(req.params.id).execAsync()
+      .then((org) => {
+        return org;
+      })
+      .catch((err) => {
+        throw err;
+      })
+    ])
+    .then(results => {
+        // the results array will equal ['one','two'] even though
+        // the second function had a shorter timeout.
+      res.render('org/show', { user: results[0], org: results[1] });
+    })
+    .catch(err => { 
+      console.log(err);
+      res.render('error', { error: err });
+    });
+  },
+  create: (req, res) => {
     var organization = new Organization();
 
     for (var key in req.body) {
       organization[key] = req.body[key];
     }
 
-    organization.save(function(err, organization) {
+    organization.save((err, organization) => {
       if (err)
         res.send(err);
 
@@ -34,75 +47,38 @@ var OrganizationController = {
       //res.json({ message: 'user created!' });
     });
   },
-  // update: function(req, res) {
-  //   User.findById(req.params.id, function(err, user) {
-  //     if (err)
-  //       res.send(err);
+  update: function(req, res) {
+    Promise.all([
+      User.findById(req.user._id).execAsync()
+      .then((user) => {
+        return user;
+      })
+      .catch((err) => {
+        throw err;
+      }),
+      Organization.findById(req.body._id).execAsync()
+      .then((org) => {
+        for (var key in req.body) {
+          org[key] = req.body[key];
+        }
 
-  //     for (var key in req.body) {
-  //       user[key] = req.body[key];
-  //     }
-
-  //     user.save(function(err) {
-  //       if (err)
-  //         res.send(err);
-
-  //       res.json(user);
-  //       //res.json({ message: 'User updated!' });
-  //     });
-  //   });
-  // },
+        return org;
+      })
+      .catch((err) => {
+        throw err;
+      })
+    ])
+    .then(results => {
+      res.render('org/show', { user: results[0], org: results[1] });
+    })
+    .catch(err => { 
+      console.log(err);
+      res.render('error', { error: err });
+    });
+  },
   // patch: function(req, res) {
-  //   User.findById(req.params.id, function(err, user) {
-  //     if (err)
-  //       res.send(err);
-
-  //     var op = req.body.op;
-  //     var path = req.body.path.substring(1);
-  //     var value = req.body.value;
-
-  //     switch(op) {
-  //       case 'replace':
-  //         user[path] = value;
-  //         break;
-        
-  //       case 'add':
-  //         break;
-  //       case 'remove':
-  //         break;
-  //       case 'move':
-  //         break;
-  //       case 'copy':
-  //         break;
-  //       case 'test':
-  //         break;
-        
-  //     }
-
-  //     user.save(function(err) {
-  //       if (err)
-  //         res.send(err);
-
-  //       res.json(user);
-  //       //res.json({ message: 'User updated!' });
-  //     });
-  //   });
   // },
   // destroy: function(req, res) {
-  //   User.remove({_id: req.params.id}, function(err, removed) {
-  //     if (err)
-  //       res.send(err);
-
-  //     res.json(removed); //qtt of removed users
-  //     //res.json({ message: 'Successfully deleted' });
-  //   });
-  // },
-  // profile: function(req, res) {
-  //   if (req.user.stage !== 3){
-  //     res.render('user/profile', { user: req.user });
-  //   }else{
-  //     res.redirect('/dashboard');
-  //   }
   // }
 };
 
