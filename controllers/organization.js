@@ -62,7 +62,7 @@ var OrganizationController = {
           org[key] = req.body[key];
         }
 
-        return org;
+        return org.saveAsync();
       })
       .catch((err) => {
         throw err;
