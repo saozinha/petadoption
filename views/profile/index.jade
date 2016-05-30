@@ -358,7 +358,7 @@ block javascript
       });
 
       function leaveAStepCallback(obj, context){
-        alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
+        //- alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
         return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation 
         //return true;
       }
