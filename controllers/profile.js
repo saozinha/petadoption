@@ -1,7 +1,6 @@
 var User = require('./../models/user');
 var Organization = require('./../models/organization');
 var Shelter = require('./../models/shelter');
-var async = require('async');
 
 var ProfileController = {
   index: function(req, res) {
