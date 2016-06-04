@@ -3,6 +3,7 @@ var user = require('./controllers/user');
 var organization = require('./controllers/organization');
 var shelter = require('./controllers/shelter');
 var profile = require('./controllers/profile');
+var tempplace = require('./controllers/temporaryPlace');
 //
 module.exports = function(app, passport) {
 
@@ -26,6 +27,13 @@ module.exports = function(app, passport) {
   // =====================================
   //
   app.post('/shelters', isLoggedIn, shelter.create);
+  //
+  // =====================================
+  // Temporary Place =====================
+  // =====================================
+  //
+  app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index);
+  // app.get('/tempplaces/:id', isLoggedIn, tempplace.show);
   // 
   // =====================================
   // Org =================================
