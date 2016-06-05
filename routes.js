@@ -1,8 +1,16 @@
-var user        = require('./controllers/user');
-// var animal      = require('./controllers/animal');
-var dashboard   = require('./controllers/dashboard');
+var dashboard = require('./controllers/dashboard');
+var user = require('./controllers/user');
+var organization = require('./controllers/organization');
+var shelter = require('./controllers/shelter');
+var profile = require('./controllers/profile');
+var tempplace = require('./controllers/temporaryPlace');
 //
 module.exports = function(app, passport) {
+
+  app.post('/teste', function(req, res){
+    console.log(req.body);
+    res.redirect('/dashboard');
+  });
   // =====================================
   // Dashboard ===========================
   // =====================================
@@ -15,15 +23,36 @@ module.exports = function(app, passport) {
   // app.delete('/users/:id', user.destroy);
   //
   // =====================================
+  // Shelter =============================
+  // =====================================
+  //
+  app.post('/shelters', isLoggedIn, shelter.create);
+  //
+  // =====================================
+  // Temporary Place =====================
+  // =====================================
+  //
+  app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index);
+  // app.get('/tempplaces/:id', isLoggedIn, tempplace.show);
+  // 
+  // =====================================
+  // Org =================================
+  // =====================================
+  //
+  app.get('/orgs/:id', isLoggedIn, organization.show);
+  app.post('/orgs', isLoggedIn, organization.create);
+  app.put('/orgs/:id', isLoggedIn, organization.update);
+  //
+  // =====================================
   // User ================================
   // =====================================
   //
-  app.get('/users', user.index);
-  app.get('/users/:id', user.show);
-  app.post('/users', user.create);
-  app.put('/users/:id', user.update);
-  app.patch('/users/:id', user.patch);
-  app.delete('/users/:id', user.destroy);
+  app.get('/users', isLoggedIn, user.index);
+  app.get('/users/:id', isLoggedIn, user.show);
+  app.post('/users', isLoggedIn, user.create);
+  app.put('/users/:id', isLoggedIn, user.update);
+  app.patch('/users/:id', isLoggedIn, user.patch);
+  app.delete('/users/:id', isLoggedIn, user.destroy);
 
   // =====================================
   // Animal ==============================
@@ -42,9 +71,13 @@ module.exports = function(app, passport) {
   // =====================================
   app.get('/', function(req, res) {
     if (req.isAuthenticated()) {
-      res.redirect('/dashboard');
+      if (req.user.stage != 1){
+        res.redirect('/profile');
+      } else {
+        res.redirect('/dashboard');
+      }
     } else {
-      res.render('index', { message: req.flash('loginMessage') }); 
+      res.redirect('/login'); 
     }
   });
   // =====================================
@@ -56,7 +89,7 @@ module.exports = function(app, passport) {
   });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
@@ -78,7 +111,9 @@ module.exports = function(app, passport) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, user.profile);
+  app.get('/profile', isLoggedInProfile, profile.index);
+  app.get('/profile/:id', isLoggedInProfile, profile.show);
+  app.post('/profile', isLoggedInProfile, profile.create);
   // =====================================
   // FACEBOOK ROUTES =====================
   // =====================================
@@ -129,8 +164,20 @@ module.exports = function(app, passport) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on 
-  if (req.isAuthenticated())
-    return next();
-  // if they aren't redirect them to the home page
-  res.redirect('/');
+  if (req.isAuthenticated()) {
+    if (req.user.stage != 1){
+      res.redirect('/profile');
+    } else {
+      return next();
+    }
+  } else {
+    res.redirect('/');
+  }
+}
+
+function isLoggedInProfile(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    else
+      res.redirect('/');
 }

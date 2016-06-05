@@ -8,6 +8,7 @@ var donationSchema = new Schema({
     country: {type: String, trim: true, required: false},
     state: {type: String, trim: true, required: false},
     city: {type: String, trim: true, required: false},
+    district: {type: String, trim: true, required: false},
     street: {type: String, trim: true, required: false},
     number: {type: String, trim: true, required: false},
     complement: {type: String, trim: true, required: false}
@@ -16,7 +17,7 @@ var donationSchema = new Schema({
   animalId: {type: Schema.Types.ObjectId, required: false},
   donationValue: {type: Number, required: false, get: getCurrency, set: setCurrency},
   createdDate: {type: Date, default: Date.now},
-  flActive: {type: Boolean, required: false}
+  flActive: {type: Boolean, default: true}
 });
 
 function getCurrency (v) {

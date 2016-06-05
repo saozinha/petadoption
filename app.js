@@ -1,3 +1,4 @@
+var Promise = require("bluebird");
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -9,6 +10,11 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var methodOverride = require('method-override')
+
+Promise.promisifyAll(mongoose.Model);
+Promise.promisifyAll(mongoose.Model.prototype);
+Promise.promisifyAll(mongoose.Query.prototype);
 
 var app = express();
 
@@ -43,6 +49,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // get information from html forms
+app.use(methodOverride('_method'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade'); // set up jade for templating
@@ -78,6 +85,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    app.locals.pretty = true;
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {

@@ -1,0 +1,94 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .page-title
+      .title_left
+        h3 User Profile
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_title
+            h2
+              | User Report 
+            .clearfix
+          .x_content
+            .col-md-3.col-sm-3.col-xs-12.profile_left
+              .profile_img
+                .avatar-view
+                  img(src='../images/picture.jpg', alt='Avatar')
+              h3 #{user.name.split(" ")[0]}
+              a.btn.btn-success
+                i.fa.fa-edit.m-right-xs
+                | Edit Profile
+            .col-md-9.col-sm-9.col-xs-12
+              .profile_title
+                .col-md-6
+                  h2 User Activity Report
+              // start of user-activity-graph
+              #graph_bar(style='width:100%; height:280px;')
+              // end of user-activity-graph
+              div(role='tabpanel', data-example-id='togglable-tabs')
+                ul#myTab.nav.nav-tabs.bar_tabs(role='tablist')
+                  li(role='presentation')
+                    a#profile-tab2 Profile
+                #myTabContent.tab-content
+                  #tab_content3.tab-pane.fade.active.in(role='tabpanel', aria-labelledby='profile-tab')
+                    p
+                      | #{user.description}
+
+block javascript
+  // chart js
+  script(src='../js/chartjs/chart.min.js')
+  // moris js
+  script(src='../js/moris/raphael-min.js')
+  script(src='../js/moris/morris.min.js')
+  // pace
+  script(src='../js/pace/pace.min.js')
+  script.
+    $(function() {
+      var day_data = [{
+        "period": "Jan",
+        "Hours worked": 80
+        }, {
+        "period": "Feb",
+        "Hours worked": 125
+        }, {
+        "period": "Mar",
+        "Hours worked": 176
+        }, {
+        "period": "Apr",
+        "Hours worked": 224
+        }, {
+        "period": "May",
+        "Hours worked": 265
+        }, {
+        "period": "Jun",
+        "Hours worked": 314
+        }, {
+        "period": "Jul",
+        "Hours worked": 347
+        }, {
+        "period": "Aug",
+        "Hours worked": 287
+        }, {
+        "period": "Sep",
+        "Hours worked": 240
+        }, {
+        "period": "Oct",
+        "Hours worked": 211
+        }];
+      Morris.Bar({
+        element: 'graph_bar',
+        data: day_data,
+        xkey: 'period',
+        hideHover: 'auto',
+        barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+        ykeys: ['Hours worked', 'sorned'],
+        labels: ['Hours worked', 'SORN'],
+        xLabelAngle: 60
+      });
+    });
